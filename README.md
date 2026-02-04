@@ -43,3 +43,22 @@ Password - Nokia@123
 ```
 
 ## Verification
+
+### NTP-Server
+### Client2
+```
+client2:~# chronyc tracking
+Reference ID    : 02020202 (2.2.2.2)
+Stratum         : 12
+Ref time (UTC)  : Wed Feb 04 04:42:56 2026
+System time     : 0.000002838 seconds slow of NTP time
+Last offset     : +0.000024928 seconds
+RMS offset      : 0.000112404 seconds
+Frequency       : 217.363 ppm slow
+Residual freq   : +0.002 ppm
+Skew            : 0.179 ppm
+Root delay      : 0.001464037 seconds
+Root dispersion : 0.000628291 seconds
+Update interval : 256.3 seconds
+Leap status     : Normal
+```
