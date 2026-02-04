@@ -1,0 +1,51 @@
+name: srlinux-ntp-server
+
+topology:
+
+  kinds:
+    nokia_srlinux:
+      image: ghcr.io/nokia/srlinux:25.7.1
+    linux:
+      image: ghcr.io/hellt/network-multitool
+
+  nodes:
+    ### SPINES ###
+    srl:
+      type: ixrd3l
+      group: spine
+      kind: nokia_srlinux
+      binds:
+        - ./configs/ntp-default.conf:/etc/opt/srlinux/ntp-default.conf
+        - ./configs/ntp-ip-vrf1.conf:/etc/opt/srlinux/ntp-ip-vrf1.conf
+      startup-config: configs/srl.cfg
+    client1:
+      type: ixrd3l
+      group: spine
+      kind: nokia_srlinux
+      startup-config: configs/client1.cfg
+    server:
+      kind: linux
+      binds:
+        - ./configs/server.sh:/tmp/server.sh
+        - ./configs/server-chrony.conf:/etc/chrony/chrony.conf  
+      exec:
+        - bash /tmp/server.sh
+        - ip addr add 10.1.1.10/24 dev eth1.10
+        - ip addr add 20.1.1.10/24 dev eth1.20
+        - ip addr add 100.100.100.100/32 dev dummy0
+        - ip route add 1.1.1.1/32 via 10.1.1.100 dev eth1.10
+        - ip route add 2.2.2.2/32 via 20.1.1.100 dev eth1.20
+    client2:
+      kind: linux
+      binds:
+        - ./configs/client2.sh:/tmp/client2.sh
+        - ./configs/client-chrony.conf:/etc/chrony/chrony.conf
+      exec:
+        - bash /tmp/client2.sh
+        - ip addr add 50.50.50.50/24 dev eth1.10
+        - ip route add 2.2.2.2/32 via 50.50.50.1 dev eth1.10
+
+  links:
+    - endpoints: ["srl:e1-1", "client1:e1-1"]
+    - endpoints: ["srl:e1-2", "client2:eth1"]
+    - endpoints: ["srl:e1-3", "server:eth1"]
