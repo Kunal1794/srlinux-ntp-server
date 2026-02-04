@@ -144,6 +144,16 @@ Hostname                      NTP   Drop Int IntL Last     Cmd   Drop Int  Last
 ===============================================================================
 50.50.50.50                    32      0   8   -   136       0      0   -     -
 ```
+> However, when using chronyc tracking/clients, only one VRF client is visible.
+This is because chronyc connects to the control socket of the one VRF chronyd instance.
+I assume that other chronyd instance does not expose its client list via the shared socket.
+Functionally everything works as expected - only the visibility in chronyc is limited. 
+Though you can check NTP packets via tcpdump command or else verify the NTP sync on the clients.
+```
+sudo ip netns exec srbase-ip-vrf1 tcpdump -ni any udp port 123
+sudo ip netns exec srbase-default tcpdump -ni any udp port 123
+```
+
 ### Client1
 ```
 info from state system ntp
