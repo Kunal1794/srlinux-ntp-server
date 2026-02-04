@@ -48,6 +48,8 @@ Password - Nokia@123
 ### Client2
 ```
 client2:~# chronyc tracking
+```
+```
 Reference ID    : 02020202 (2.2.2.2)
 Stratum         : 12
 Ref time (UTC)  : Wed Feb 04 04:42:56 2026
