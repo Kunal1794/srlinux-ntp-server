@@ -8,7 +8,7 @@ SRL as NTP server
 ```
 containerlab deploy -t srlinux-ntp-server.yml
 ```
-## Steps to deploy CLAB
+## Steps to destroy CLAB
 ```
 containerlab destroy -t srlinux-ntp-server.yml -c
 ```
