@@ -20,26 +20,33 @@ containerlab destroy -t srlinux-ntp-server.yml -c
 ```
 
 ## Post Deployment Steps
-Need to configure SRL, Server & Client2 post clab deployment, here is the below steps
+After the Containerlab topology is successfully deployed, a few manual configuration steps are required on the SR Linux node, NTP Server, and Client2 to start the chrony services and validate NTP functionality.
+Follow the steps below in sequence:
 
 ### SRL
+Login to the SR Linux node:
 ```
 ssh clab-srlinux-ntp-server-srl
 ```
+Switch to bash shell with root privileges & Start chrony instances inside the required network namespaces:
 ```
 bash sudo bash
 sudo ip netns exec srbase-default chronyd -f /etc/opt/srlinux/ntp-default.conf -r
 sudo ip netns exec srbase-ip-vrf1 chronyd -f /etc/opt/srlinux/ntp-ip-vrf1.conf -r
 ```
-Set Date [Optional]
+(Optional) Manually Set System Date
+If required for testing, you can manually set the system date before NTP synchronization:
 ```
 date 020323332026.00   #date MMDDHHMiMiYYYY.SS
 ```
 ### NTP-Server
+Login to the NTP Server node:
 ```
 ssh clab-srlinux-ntp-server-server
 ```
 Password - Nokia@123
+
+Start the chrony daemon in debug mode:
 ```
 chronyd -f /etc/chrony/chrony.conf -d &
 ```
