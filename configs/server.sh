@@ -4,8 +4,8 @@ ip link set eth1.10 up
 ip link set eth1.20 up
 ip link add dummy0 type dummy
 ip link set dummy0 up
-export HTTP_PROXY="http://inban1b-proxy.apac.nsn-net.net:8080"
-export HTTPS_PROXY="http://inban1b-proxy.apac.nsn-net.net:8080"
+#export HTTP_PROXY="x.x.x.x:x"
+#export HTTPS_PROXY="x.x.x.x:x"
 echo -e "PermitRootLogin yes\nPubkeyAuthentication yes\nAuthorizedKeysFile .ssh/authorized_keys\nPasswordAuthentication yes\nPermitEmptyPasswords yes\nAllowTcpForwarding no\nGatewayPorts no\nX11Forwarding no\nSubsystem sftp /usr/lib/ssh/sftp-server" | tee /etc/ssh/sshd_config > /dev/null
 echo "root:Nokia@123" | chpasswd
 apk add openssh
