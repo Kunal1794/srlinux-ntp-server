@@ -25,6 +25,10 @@ bash sudo bash
 sudo ip netns exec srbase-default chronyd -f /etc/opt/srlinux/ntp-default.conf -r
 sudo ip netns exec srbase-ip-vrf1 chronyd -f /etc/opt/srlinux/ntp-ip-vrf1.conf -r
 ```
+Set Date [Optional]
+```
+date 020323332026.00   #date MMDDHHMiMiYYYY.SS
+```
 ### NTP-Server
 ```
 ssh clab-srlinux-ntp-server-server
