@@ -1,4 +1,4 @@
-# srlinux-ntp-server
+# Srlinux-NTP-Server
 SRL as NTP server
 
 ## Topology
