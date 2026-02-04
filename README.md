@@ -1,5 +1,11 @@
 # Srlinux-NTP-Server
-SRL as NTP server
+SR Linux as NTP Server – Chrony Configuration per VRF
+This repository provides a working example and configuration framework to run SR Linux (SRL) as an NTP server using Linux chrony, including support for:
+--> Per-VRF NTP instances
+--> Source IP binding
+--> Loopback-based NTP services
+--> Systemd service separation
+--> Chrony process isolation
 
 ## Topology
 <img width="1240" height="399" alt="image" src="https://github.com/user-attachments/assets/ea9c4e31-d7ec-4105-8748-a58dbcefb9a4" />
